@@ -8,13 +8,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.3.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "prima": "^0.0.1"
   },
   "keywords": [],
   "description": "",
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "prisma": "^6.3.0",
+    "typescript": "^5.7.3"
   }
 }
