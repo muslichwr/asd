@@ -163,4 +163,39 @@ const updatePost = async (req, res) => {
 
 };
 
-module.exports = {findPosts,createPosts,findPostById,updatePost};
+const deletePost = async (req, res) => {
+
+    const {id} = req.params;
+
+    try {
+
+        const post = await prisma.post.delete({
+            where: {
+                id: Number(id),
+            },
+        });
+
+        if (post && post.image) {
+            const imagePath = path.join(process.cwd(), 'uploads', post.image);
+
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath);
+            } else {
+                console.log('File tidak ditemukan', imagePath);
+            }
+        }
+
+        res.status(200).send({
+            success: true,
+            message: 'Post deleted successfully',
+        });
+        
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: 'Internal server error'
+        });
+    }
+};
+
+module.exports = {findPosts,createPosts,findPostById,updatePost,deletePost};
